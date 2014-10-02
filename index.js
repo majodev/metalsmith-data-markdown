@@ -1,7 +1,9 @@
 var marked = require("marked");
 var cheerio = require('cheerio');
-var extname = require('path').extname;
 var he = require("he");
+var _ = require("lodash");
+
+var extname = require('path').extname;
 
 /**
  * Expose `plugin`.
@@ -21,7 +23,17 @@ module.exports = plugin;
  */
 
 function plugin(options) {
-  marked.setOptions(options);
+
+  var removeAttributeAfterwards = false;
+
+  if(_.isUndefined(options) === false) {
+    if( _.isUndefined(options.marked) === false) {
+      marked.setOptions(options.marked);
+    }
+    if( _.isUndefined(options.removeAttributeAfterwards) === false) {
+      removeAttributeAfterwards = options.removeAttributeAfterwards;
+    }
+  }
 
   return function(files, metalsmith, done) {
     setImmediate(done);
@@ -40,6 +52,11 @@ function plugin(options) {
         //console.log(markedText);
         $(this).html(markedText);
         foundMatches = true;
+        
+        if(removeAttributeAfterwards) {
+          $(this).removeAttr("data-markdown");
+        }
+        
       });
 
       if (foundMatches) { // only do anything to contents, if matches were found
