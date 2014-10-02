@@ -1,0 +1,27 @@
+{
+  "name": "metalsmith-datamarkdown",
+  "version": "0.0.1",
+  "description": "A Metalsmith plugin to use markdown content within html tags (with data-markdown attribute)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/majodev/metalsmith-datamarkdown.git"
+  },
+  "keywords": [
+    "metalsmith",
+    "plugin",
+    "markdown",
+    "data-markdown",
+    "html",
+    "tags"
+  ],
+  "author": "majodev <mario@ranf.tl> (http://majodev.github.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/majodev/metalsmith-datamarkdown/issues"
+  },
+  "homepage": "https://github.com/majodev/metalsmith-datamarkdown"
+}
