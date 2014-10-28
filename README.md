@@ -1,4 +1,4 @@
-#metalsmith-datamarkdown
+#metalsmith-data-markdown
 
 > A [Metalsmith](http://metalsmith.io) plugin to use markdown content within html tags via `data-markdown` attribute
 
@@ -12,14 +12,14 @@ As part the my note *"[Extracting libs from a node.js project: Publishing my met
 ## Installation
 
 ```bash
-npm install --save metalsmith-datamarkdown
+npm install --save metalsmith-data-markdown
 ```
 
 ## Usage
 
 ```javascript
 var Metalsmith = require("metalsmith");
-var datamarkdown = require("metalsmith-datamarkdown");
+var datamarkdown = require("metalsmith-data-markdown");
 
 Metalsmith(__dirname)
   // ... state when html files are available
