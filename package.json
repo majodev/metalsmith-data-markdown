@@ -1,6 +1,6 @@
 {
   "name": "metalsmith-data-markdown",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Metalsmith plugin to use markdown content within html tags (with data-markdown attribute)",
   "main": "index.js",
   "scripts": {
