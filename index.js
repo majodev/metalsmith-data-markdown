@@ -24,16 +24,14 @@ module.exports = plugin;
 
 function plugin(options) {
 
-  var removeAttributeAfterwards = false;
+  var opts = options || {};
 
-  if(_.isUndefined(options) === false) {
-    if( _.isUndefined(options.marked) === false) {
-      marked.setOptions(options.marked);
-    }
-    if( _.isUndefined(options.removeAttributeAfterwards) === false) {
-      removeAttributeAfterwards = options.removeAttributeAfterwards;
-    }
-  }
+  // set default options or args
+  opts.marked = opts.marked || {};
+  opts.removeAttributeAfterwards = opts.removeAttributeAfterwards || false;
+
+  // hand opts to marked
+  marked.setOptions(opts.marked);
 
   return function(files, metalsmith, done) {
     setImmediate(done);
@@ -42,21 +40,25 @@ function plugin(options) {
       var data = files[file];
       var foundMatches = false;
 
+      // parse html content in cheerio to query it
       var $ = cheerio.load(data.contents.toString());
 
       $("[data-markdown]").each(function(index) {
+        
         // grab the html of the node and 
         // decode all html entities (as marked doesn't have to know about them)
         // decoding fixes problems with smartypants
-        var markedText = marked(he.decode($(this).html())); 
-        //console.log(markedText);
+        var markedText = marked(he.decode($(this).html()));
+
+        // set compiled markdown content to node
         $(this).html(markedText);
         foundMatches = true;
-        
-        if(removeAttributeAfterwards) {
+
+        // remove attr if configured
+        if (opts.removeAttributeAfterwards) {
           $(this).removeAttr("data-markdown");
         }
-        
+
       });
 
       if (foundMatches) { // only do anything to contents, if matches were found
