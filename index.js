@@ -62,7 +62,7 @@ function plugin(options) {
       });
 
       if (foundMatches) { // only do anything to contents, if matches were found
-        files[file].contents = $.html();
+        files[file].contents = new Buffer($.html());
       }
 
     });
